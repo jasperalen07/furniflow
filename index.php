@@ -22,6 +22,28 @@ if (!$result) {
 <body>
     <div class="container">
         <h1>User List</h1>
+
+        <!-- Add new user feature -->
+
+        <h2 class="new-user">New User</h2>
+
+        <form action="add.php" method="post">
+        <label for="name">Name:</label>
+            <input type="text" name="name" id="name" required>
+            <label for="email">Email:</label>
+            <input type="email" name="email" id="email" required>
+            <button type="submit">Add User</button>
+
+
+        </form>
+
+
+
+
+
+
+
+
         <table>
             <thead>
                 <tr>
