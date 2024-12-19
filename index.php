@@ -24,25 +24,14 @@ if (!$result) {
         <h1>User List</h1>
 
         <!-- Add new user feature -->
-
         <h2 class="new-user">New User</h2>
-
-        <form action="add.php" method="post">
-        <label for="name">Name:</label>
+        <form action="add.php" method="POST"> <!-- Correct the form placement -->
+            <label for="name">Name:</label>
             <input type="text" name="name" id="name" required>
             <label for="email">Email:</label>
             <input type="email" name="email" id="email" required>
             <button type="submit">Add User</button>
-
-
         </form>
-
-
-
-
-
-
-
 
         <table>
             <thead>
@@ -50,6 +39,7 @@ if (!$result) {
                     <th>ID</th>
                     <th>Name</th>
                     <th>Email</th>
+                    <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
@@ -61,10 +51,14 @@ if (!$result) {
                         echo "<td>" . $row['id'] . "</td>";
                         echo "<td>" . $row['name'] . "</td>";
                         echo "<td>" . $row['email'] . "</td>";
+                        echo "<td>
+                                <a href='edit.php?id=" . $row['id'] . "'>Edit</a> | 
+                                <a href='delete.php?id=" . $row['id'] . "' onclick='return confirm(\"Are you sure you want to delete this record?\");'>Delete</a>
+                              </td>";
                         echo "</tr>";
                     }
                 } else {
-                    echo "<tr><td colspan='3'>No data found</td></tr>";
+                    echo "<tr><td colspan='4'>No data found</td></tr>";
                 }
                 ?>
             </tbody>
