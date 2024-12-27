@@ -1,25 +1,24 @@
 <?php
 include 'db.php';
 
-// Check if form data is submitted
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $name = $_POST['name'];
+    $price = $_POST['price'];
+    $image = $_POST['image'];
+    $description = $_POST['description'];
 
- if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $name = $_POST['name']; // Get the name from the form
-    $email = $_POST['email']; // Get the email from the form
+    // Prepare and execute the query
+    $stmt = $conn->prepare("INSERT INTO furniture (name, price, image, description) VALUES (?, ?, ?, ?)");
+    $stmt->bind_param("sdss", $name, $price, $image, $description);
 
-
-    // Prepare and execute the query to insert data
-
-    $stmt = $conn->prepare("INSERT INTO `1` (name, email) VALUES (?, ?)");
-    $stmt->bind_param("ss", $name, $email); // Bind the parameters
-    $result = $stmt->execute();
-
-    if ($result) {
-        echo "User added successfully!";
-        header("Location: index.php"); // Redirect to the main page
-        exit;
+    if ($stmt->execute()) {
+        header("Location: index.php");
+        exit();
     } else {
         echo "Error: " . $stmt->error;
     }
+
+    $stmt->close();
+    $conn->close();
 }
 ?>

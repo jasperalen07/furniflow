@@ -50,3 +50,76 @@ p {
     color: #666;
     font-size: 1.2rem;
 }
+
+/* Forms  */
+
+/* General Form Styling */
+.add-furniture-section {
+    max-width: 600px; /* Limits the width of the form */
+    margin: 50px auto; /* Centers the form with space on top and bottom */
+    padding: 20px;
+    background-color: #f9f9f9; /* Light background for the form */
+    border: 1px solid #ddd; /* Subtle border */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Soft shadow */
+}
+
+.add-furniture-section h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 24px;
+    color: #333; /* Dark text for the heading */
+}
+
+/* Styling the Form Elements */
+.add-furniture-section form {
+    display: flex;
+    flex-direction: column; /* Stack elements vertically */
+}
+
+.add-furniture-section label {
+    margin-top: 10px;
+    font-weight: bold;
+    color: #555; /* Slightly darker text for labels */
+}
+
+.add-furniture-section input,
+.add-furniture-section textarea {
+    margin-top: 5px;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ccc; /* Light border for inputs */
+    border-radius: 4px; /* Slight rounded corners */
+    outline: none;
+}
+
+.add-furniture-section input:focus,
+.add-furniture-section textarea:focus {
+    border-color: #4CAF50; /* Highlight border when focused */
+}
+
+/* Styling the Textarea */
+.add-furniture-section textarea {
+    resize: vertical; /* Allow vertical resizing only */
+    min-height: 100px;
+}
+
+/* Styling the Submit Button */
+.add-furniture-section button {
+    margin-top: 20px;
+    padding: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    color: white;
+    background-color: #4CAF50; /* Green button */
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.add-furniture-section button:hover {
+    background-color: #388E3C; /* Darker green on hover */
+}
+
+
