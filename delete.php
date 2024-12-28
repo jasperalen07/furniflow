@@ -2,28 +2,21 @@
 include 'db.php';
 
 // Check if 'id' is passed in the URL
+if (isset($_GET['id'])) {
+    $id = intval($_GET['id']); // To make sure the ID is treated as an integer
+    
+    // Prepare the delete query
 
-if(isset($_GET['id'])){
-    $id = intval($_GET['id']);
+    $stmt = $conn->prepare("DELETE FROM furniture WHERE id = ?");
+    $stmt->bind_param("i", $id); //Bind the ID as an integer
 
-    // Prepare and execute the delete query
-
-    $query = "DELETE FROM `1` WHERE id = ?";
-    $stmt = $conn->prepare($query);
-    $stmt->bind_param("i", $id);
-
-    if ($stmt->execute()) {
-        // Redirect back to the index page after successful deletion
+    // EXecute the query
+    if ($stmt->execute()){
         header("Location: index.php");
         exit();
     } else {
-        echo "Error deleting record: " . $conn->error;
+        echo " Invalid request . No ID Provided";
     }
-} else {
-    echo "Invalid request.";
+
 }
-
-       
-
-
 ?>
