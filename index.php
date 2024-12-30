@@ -6,9 +6,30 @@ include 'db.php';
 $query = "SELECT * FROM `furniture`";
 $result = $conn->query($query);
 
+
+// Search Feature
+
+// Check if search term exist
+
+ if(isset($_GET['search']) && !empty($_GET['search'])) {
+
+    $search = "%" . $_GET['search'] . "%";
+    $query .= "WHERE name LIKE ? OR description LIKE ?";
+}
+
+// Prepare and execute the query
+$stmt = $conn->prepare($query);
+
+if (isset($search)) {
+    $stmt->bind_param("ss", $search, $search);
+}
+
 if (!$result) {
     die("Query failed: " . $conn->error);
 }
+
+$stmt->execute();
+$result = $stmt->get_result();
 ?>
 
 <!DOCTYPE html>
@@ -21,8 +42,13 @@ if (!$result) {
 </head>
 <body>
     <div class="container">
-        <h1>Furniture List</h1>
-        <a href="add.php" class="btn">Add New Furniture</a>
+        <h1>FurniFlow Inventory List</h1>
+
+        <form action="index.php" method="GET" class="search-form">
+    <input type="text" name="search" placeholder="Search by name or description..." value="<?php echo isset($_GET['search']) ? htmlspecialchars($_GET['search']) : ''; ?>">
+    <button type="submit">Search</button>
+</form>
+
 
         <!-- Display Furniture Table -->
         <table>
@@ -62,7 +88,7 @@ if (!$result) {
 
     <!-- Add New Furniture Form -->
     <section class="add-furniture-section">
-        <h2>Add New Furniture</h2>
+        <h2>Add New Product</h2>
         <form action="add.php" method="POST">
             <label for="name">Name:</label>
             <input type="text" name="name" id="name" required>
