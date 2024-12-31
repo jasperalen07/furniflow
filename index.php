@@ -63,25 +63,26 @@ $result = $stmt->get_result();
                 </tr>
             </thead>
             <tbody>
-                <?php
-                if ($result->num_rows > 0) {
-                    while ($row = $result->fetch_assoc()) {
-                        echo "<tr>";
-                        echo "<td>" . $row['id'] . "</td>";
-                        echo "<td>" . htmlspecialchars($row['name']) . "</td>";
-                        echo "<td>$" . number_format($row['price'], 2) . "</td>";
-                        echo "<td><img src='images/" . htmlspecialchars($row['image']) . "' alt='" . htmlspecialchars($row['name']) . "' width='150'></td>";
-                        echo "<td>" . htmlspecialchars($row['description']) . "</td>";
-                        echo "<td>
-                                <a href='edit.php?id=" . $row['id'] . "' class='btn'>Edit</a> | 
-                                <a href='delete.php?id=" . $row['id'] . "' class='btn' onclick='return confirm(\"Are you sure you want to delete this record?\");'>Delete</a>
-                              </td>";
-                        echo "</tr>";
-                    }
-                } else {
-                    echo "<tr><td colspan='6'>No furniture items found</td></tr>";
-                }
-                ?>
+            <?php
+if ($result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+        echo "<tr>";
+        echo "<td>" . $row['id'] . "</td>";
+        echo "<td>" . $row['name'] . "</td>";
+        echo "<td>$" . number_format($row['price'], 2) . "</td>";
+        echo "<td><img src='images/" . $row['image'] . "' alt='" . $row['name'] . "' width='150'></td>";
+        echo "<td>" . $row['description'] . "</td>";
+        echo "<td>
+                <a href='edit.php?id=" . $row['id'] . "' class='btn'>Edit</a> | 
+                <a href='delete.php?id=" . $row['id'] . "' class='btn' onclick='return confirm(\"Are you sure you want to delete this record?\");'>Delete</a>
+              </td>";
+        echo "</tr>";
+    }
+} else {
+    echo "<tr><td colspan='6'>No matching results found</td></tr>";
+}
+?>
+
             </tbody>
         </table>
     </div>
