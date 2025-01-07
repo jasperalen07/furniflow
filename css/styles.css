@@ -149,5 +149,25 @@ p {
     background-color: #388E3C;
 }
 
+/* /* Sort  */
+
+.sorting-form {
+    margin: 20px 0;
+    text-align: right;
+}
+
+.sorting-form label {
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+.sorting-form select {
+    padding: 5px;
+    font-size: 14px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+}
+
+
 
 

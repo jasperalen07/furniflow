@@ -6,9 +6,35 @@ include 'db.php';
 $query = "SELECT * FROM `furniture`";
 $result = $conn->query($query);
 
+// Sorting Feature
+
+if (isset($_GET['sort'])){
+    $sort = $_GET['sort'];
+
+    switch ($sort) {
+        case 'price_asc':
+            $query .= " ORDER BY price ASC";
+            break;
+        case 'price_desc':
+            $query .= " ORDER BY price DESC";
+            break;
+        case 'name_asc':
+            $query .= " ORDER BY name ASC";
+            break;
+        case 'name_desc':
+            $query .= " ORDER BY name DESC";
+            break;
+    }
+
+    $result = $conn->query($query);
+
+if (!$result) {
+    die("Query failed: " . $conn->error);
+}
+}
+
 
 // Search Feature
-
 // Check if search term exist
 
  if(isset($_GET['search']) && !empty($_GET['search'])) {
@@ -47,6 +73,18 @@ $result = $stmt->get_result();
         <form action="index.php" method="GET" class="search-form">
     <input type="text" name="search" placeholder="Search by name or description..." value="<?php echo isset($_GET['search']) ? htmlspecialchars($_GET['search']) : ''; ?>">
     <button type="submit">Search</button>
+</form>
+
+<!-- Sorting Section -->
+<form method="GET" action="index.php" class="sorting-form">
+    <label for="sort">Sort By:</label>
+    <select name="sort" id="sort" onchange="this.form.submit()">
+        <option value="">Select Sorting</option>
+        <option value="price_asc">Price: Low to High</option>
+        <option value="price_desc">Price: High to Low</option>
+        <option value="name_asc">Name: A-Z</option>
+        <option value="name_desc">Name: Z-A</option>
+    </select>
 </form>
 
 
